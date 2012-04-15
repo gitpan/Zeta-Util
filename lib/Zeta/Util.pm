@@ -19,12 +19,12 @@ Zeta::Util
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
 BEGIN {
-	our $VERSION = '0.01';
+	our $VERSION = '0.02';
 }
 
 ##############################################################################
@@ -251,9 +251,8 @@ sub is_int($) {
 	my $response;
 	no warnings 'numeric';
 	if ($value =~ /^[0-9]+\.$/) {
-		# fix problem where 2.00 doesn't get recognized as float
-		# by making sure a non-zero decimal exists for numbers that
-		# have a decimal and 1 or more 0s
+		# fix problem where 2. doesn't get recognized as int
+		# by trimming trailing decimal point before testing.
 		$value =~ s/\.$//;
 	}
 	$response = is_type_int($value+0);
